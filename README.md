@@ -32,9 +32,12 @@ Mac and Linux:
 mkdir -p ~/my-agent && cd ~/my-agent && git clone https://github.com/Arkhano97/fullstack-agent && cd fullstack-agent && claude "set me up"
 ```
 
+You need [Claude Code](https://claude.com/claude-code) with a Claude subscription. Windows needs nothing else.
+
 Windows (PowerShell):
 
 ```
+$d="$env:USERPROFILE\.local\bin"; if (Test-Path "$d\claude.exe") { $env:Path="$d;$env:Path" }; New-Item -ItemType Directory -Force -Path $HOME\my-agent | Out-Null; cd $HOME\my-agent; if (-not (Test-Path fullstack-agent\fullstack-agent.md)) { Invoke-WebRequest https://github.com/Arkhano97/fullstack-agent/archive/refs/heads/main.zip -OutFile fsa.zip; Expand-Archive fsa.zip . -Force; New-Item -ItemType Directory -Force -Path fullstack-agent | Out-Null; Get-ChildItem fullstack-agent-main -Force | Copy-Item -Destination fullstack-agent -Recurse -Force; Remove-Item fullstack-agent-main -Recurse -Force; Remove-Item fsa.zip }; cd fullstack-agent; if (Get-Command claude -ErrorAction SilentlyContinue) { claude "set me up" } else { Write-Output "Claude Code is not installed yet. Run: irm https://claude.ai/install.ps1 | iex   then paste this again." }
 ```
 
 
